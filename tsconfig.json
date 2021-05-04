@@ -1,6 +1,19 @@
 {
-  "extends": "@quasar/app/tsconfig-preset",
-  "compilerOptions": {
-    "baseUrl": "."
-  }
+    "extends": "@quasar/app/tsconfig-preset",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "allowJs": true,
+        // "target": "es5" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019' or 'ESNEXT'. */,
+        // "module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
+        "outDir": "dist",
+        "sourceMap": true,
+        "noImplicitThis": false,
+        "noImplicitAny": false,
+        "typeRoots": ["node_modules/vue/types", "node_modules/@types"],
+        "paths": {
+            "*": ["*", "src/*"]
+        },
+        "esModuleInterop": true,
+        "types": ["jest", "quasar"]
+    }
 }
