@@ -3,15 +3,12 @@
     .col
         .row.justify-around
             button(
-                label='play',
-                @click='runToFinish'
+                @click='playOnClicked'
             ) Play
             button(
-                label='play',
-                @click='runNext'
+                @click='() => { this.isPlaying = true; runNext(); }'
             ) Next
             button(
-                label='play',
                 @click='reset'
             ) Reset
         .row.justify-start.text-left(
@@ -60,11 +57,13 @@ export default defineComponent({
             currentIndex: -1,
             nextIndex: -1,
             theSortInstance: null,
+            isPlaying: false,
         };
     },
     watch: {
-        ['$store.state.isPlayAllInProgress']: function (newValue) {
-            if (newValue) {
+        ['$store.state.play.isPlayAllInProgress']: function (isPlaying) {
+            this.isPlaying = isPlaying;
+            if (isPlaying) {
                 this.runToFinish();
             }
             return;
@@ -96,7 +95,12 @@ export default defineComponent({
             this.sortInstance.sortNext();
             this.updateReactiveData();
         },
+        playOnClicked: function () {
+            this.isPlaying = !this.isPlaying;
+            if (this.isPlaying) this.runToFinish();
+        },
         runToFinish: function () {
+            if (!this.isPlaying) return;
             const result = this.sortInstance.sortGen().next();
             this.updateReactiveData();
             if (!result.done) {
@@ -105,6 +109,8 @@ export default defineComponent({
                         this.runToFinish();
                     });
                 }, 50);
+            } else {
+                this.isPlaying = false;
             }
         },
         getStyle: function (item: IData) {
