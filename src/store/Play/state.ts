@@ -1,15 +1,20 @@
 export interface IPlayState {
-    isPlayAllInProgress: boolean;
+    isPlayingAll: boolean;
+    isPlayingInsertion: boolean;
+    isPlayingRandom: boolean;
 }
 
 function state(): IPlayState {
     return {
-        isPlayAllInProgress: false,
+        isPlayingAll: false,
+        isPlayingInsertion: false,
+        isPlayingRandom: false,
     };
 }
 
 export class PlayState {
     static readonly MUTATAION_PlayAll = 'iwm_play_all';
+    static readonly MUTATAION_PlayInsertion = 'iwm_play_insertion';
 }
 
 export default state;

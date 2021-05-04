@@ -11,6 +11,17 @@ export interface ISortCallbackFn {
     (instance: SortBase, isDone: boolean): void;
 }
 
+export enum EDataType {
+    RANDOM = 'random',
+    NEARLY_SORTED = 'nearly_sorted',
+    REVERSED = 'reversed',
+    FEW_UNIQUE = 'few_unique',
+}
+
+export enum ESortType {
+    INSERTION = 'insert',
+}
+
 function prepData(value: number, index: number) {
     return { index, value, sorted: false };
 }

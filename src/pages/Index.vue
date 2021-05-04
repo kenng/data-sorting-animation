@@ -9,9 +9,19 @@ q-page.row.items-center.justify-evenly
                 size='24px'
             )
             div All
+        th(
+            @click='togglePlayInsertion'
+        )
+            q-icon(
+                name='play_arrow',
+                size='24px'
+            )
+            div Insertion
 
     Graph.col-12(
-        :sortInstance='insertSortInstance'
+        :sortInstance='insertSortInstance',
+        :dataType='EDataType.RANDOM',
+        :sortType='ESortType.INSERTION'
     )
 </template>
 
@@ -19,7 +29,7 @@ q-page.row.items-center.justify-evenly
 import { defineComponent } from '@vue/composition-api';
 import Graph from 'components/Graph.vue';
 import { InsertionSort } from 'algorithms/InsertionSort';
-import { data } from 'data/data';
+import { data, EDataType, ESortType } from 'data/data';
 import PlayMixin from 'src/mixins/play-mixin.vue';
 
 export default defineComponent({
@@ -29,6 +39,8 @@ export default defineComponent({
     data: function () {
         return {
             insertSortInstance: new InsertionSort(data.random),
+            EDataType,
+            ESortType,
         };
     },
 });

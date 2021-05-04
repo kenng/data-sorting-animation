@@ -39,13 +39,21 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api';
-import { IData } from 'data/data';
+import { EDataType, IData, ESortType } from 'data/data';
 import { SortBase } from 'algorithms/SortBase';
 
 export default defineComponent({
     props: {
         sortInstance: {
             type: Object as PropType<SortBase>,
+            required: true,
+        },
+        dataType: {
+            type: String as PropType<EDataType>,
+            required: true,
+        },
+        sortType: {
+            type: String as PropType<ESortType>,
             required: true,
         },
     },
@@ -61,12 +69,14 @@ export default defineComponent({
         };
     },
     watch: {
-        ['$store.state.play.isPlayAllInProgress']: function (isPlaying) {
-            this.isPlaying = isPlaying;
-            if (isPlaying) {
-                this.runToFinish();
-            }
-            return;
+        ['$store.state.play.isPlayingAll']: function (isPlaying) {
+            this.execPlay(isPlaying);
+        },
+        ['$store.state.play.isPlayingInsertion']: function (isPlaying) {
+            if (this.sortType == ESortType.INSERTION) this.execPlay(isPlaying);
+        },
+        ['$store.state.play.isPlayingRandom']: function (isPlaying) {
+            if (this.sortType == EDataType.RANDOM) this.execPlay(isPlaying);
         },
     },
     computed: {
@@ -90,6 +100,13 @@ export default defineComponent({
             this.currentIndex = reactive.currenIndex;
             this.nextIndex = reactive.nextIndex;
             this.data = Object.assign([], reactive.data);
+        },
+        execPlay: function (isPlaying) {
+            debugger;
+            this.isPlaying = isPlaying;
+            if (isPlaying) {
+                this.runToFinish();
+            }
         },
         runNext: function () {
             this.sortInstance.sortNext();
