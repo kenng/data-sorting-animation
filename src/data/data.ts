@@ -1,39 +1,149 @@
-import { SortBase } from 'algorithms/SortBase';
-import random from './randomData';
+const random = [
+    124,
+    401,
+    251,
+    458,
+    688,
+    587,
+    105,
+    540,
+    723,
+    451,
+    404,
+    775,
+    241,
+    82,
+    308,
+    48,
+    426,
+    737,
+    762,
+    684,
+];
 
-export interface IData {
-    index: number;
-    value: number;
-    sorted: boolean;
-}
+const reversed = [
+    775,
+    762,
+    737,
+    723,
+    688,
+    684,
+    587,
+    540,
+    458,
+    451,
+    426,
+    404,
+    401,
+    308,
+    251,
+    241,
+    124,
+    105,
+    82,
+    48,
+];
 
-export interface ISortCallbackFn {
-    (instance: SortBase, isDone: boolean): void;
-}
+const few_unique = [
+    688,
+    401,
+    251,
+    458,
+    688,
+    587,
+    688,
+    688,
+    723,
+    451,
+    404,
+    775,
+    688,
+    82,
+    688,
+    688,
+    688,
+    737,
+    762,
+    688,
+];
 
-export enum EDataType {
-    RANDOM = 'random',
-    NEARLY_SORTED = 'nearly_sorted',
-    REVERSED = 'reversed',
-    FEW_UNIQUE = 'few_unique',
-}
+const nearly_sorted = [
+    48,
+    82,
+    105,
+    241,
+    251,
+    308,
+    124,
+    401,
+    426,
+    451,
+    404,
+    458,
+    684,
+    540,
+    587,
+    688,
+    723,
+    762,
+    775,
+    737,
+];
 
-export enum ESortType {
-    INSERTION = 'insert',
-}
+const sorted_for_all = [
+    48,
+    82,
+    105,
+    124,
+    241,
+    251,
+    308,
+    401,
+    404,
+    426,
+    451,
+    458,
+    540,
+    587,
+    684,
+    688,
+    723,
+    737,
+    762,
+    775,
+];
 
-function prepData(value: number, index: number) {
-    return { index, value, sorted: false };
-}
+const sorted_few_unique = [
+    82,
+    251,
+    401,
+    404,
+    451,
+    458,
+    587,
+    688,
+    688,
+    688,
+    688,
+    688,
+    688,
+    688,
+    688,
+    688,
+    723,
+    737,
+    762,
+    775,
+];
 
-export function deepClone(data: IData[]): IData[] {
-    return data.map((item) => JSON.parse(JSON.stringify(item)));
-}
-
-export const data = {
-    random: random.data.map(prepData),
+export default {
+    random,
+    reversed,
+    few_unique,
+    nearly_sorted,
 };
 
 export const sorted = {
-    random: random.sorted,
+    sorted_few_unique,
+    sorted_for_all,
 };

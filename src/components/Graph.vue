@@ -1,34 +1,56 @@
 <template lang="pug">
-.iw-com-graph.col
+.iw-com-graph.relative-position.column
     .col
-        .row.justify-around
-            button(
-                @click='playOnClicked'
-            ) Play
-            button(
-                @click='() => { this.isPlaying = true; runNext(); }'
-            ) Next
-            button(
+        .row.justify-around.q-mb-sm(
+            v-if='showController'
+        )
+            template(
+                v-if='!isPlaying'
+            )
+                q-icon(
+                    name='play_arrow',
+                    @click='playOnClicked'
+                )
+            template(
+                v-else
+            )
+                q-icon(
+                    name='pause',
+                    @click='playOnClicked'
+                )
+            q-icon(
+                name='redo',
+                @click='runNext'
+            )
+            q-icon(
+                name='restart_alt',
                 @click='reset'
-            ) Reset
+            )
+
         .row.justify-start.text-left(
             v-if='showIndex'
         )
-            .col.justify-start
+            .col.justify-start(
+                v-if='showPointerIndex'
+            )
                 div nextIndex: {{ nextIndex }}
                 div currentIndex: {{ currentIndex }}
                 .row.q-ml-md
-        .col-3(
-            @click='runNext'
+
+        .iw-graph-data(
+            @wheel.prevent='onWheelEv'
         )
-            div(
+            .full-width(
                 v-for='(item, index) in data',
                 :key='item.index'
             )
                 .iw-line(
                     :class='{ active: index == currentIndex }',
                     :style='getStyle(item)'
-                ) {{ item.value }}
+                )
+                    span(
+                        v-if='showNumber'
+                    ) {{ item.value }}
 
     .col(
         v-if='showJsonData'
@@ -39,7 +61,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api';
-import { EDataType, IData, ESortType } from 'data/data';
+import { EDataType, IData, ESortType } from 'src/data';
 import { SortBase } from 'algorithms/SortBase';
 
 export default defineComponent({
@@ -56,6 +78,22 @@ export default defineComponent({
             type: String as PropType<ESortType>,
             required: true,
         },
+        showController: {
+            type: Boolean,
+            default: true,
+        },
+        showNumber: {
+            type: Boolean,
+            default: false,
+        },
+        showPointerIndex: {
+            type: Boolean,
+            default: false,
+        },
+        showTotalStep: {
+            type: Boolean,
+            default: true,
+        },
     },
     components: {},
     data: function () {
@@ -66,24 +104,42 @@ export default defineComponent({
             nextIndex: -1,
             theSortInstance: null,
             isPlaying: false,
+            isSorted: false,
+            runToFinishTimer: null,
         };
     },
     watch: {
-        ['$store.state.play.isPlayingAll']: function (isPlaying) {
-            this.execPlay(isPlaying);
+        ['$store.state.play.isPlayingAll']: function () {
+            this.execPlay();
         },
-        ['$store.state.play.isPlayingInsertion']: function (isPlaying) {
-            if (this.sortType == ESortType.INSERTION) this.execPlay(isPlaying);
+        ['$store.state.play.isPlayingRandom']: function () {
+            if (this.dataType == EDataType.RANDOM) {
+                this.execPlay();
+            }
         },
-        ['$store.state.play.isPlayingRandom']: function (isPlaying) {
-            if (this.sortType == EDataType.RANDOM) this.execPlay(isPlaying);
+        ['$store.state.play.isPlayingReversed']: function () {
+            if (this.dataType == EDataType.REVERSED) {
+                this.execPlay();
+            }
+        },
+        ['$store.state.play.isPlayingFewUnique']: function () {
+            if (this.dataType == EDataType.FEW_UNIQUE) {
+                this.execPlay();
+            }
+        },
+        ['$store.state.play.isPlayingNearlySorted']: function () {
+            if (this.dataType == EDataType.NEARLY_SORTED) {
+                this.execPlay();
+            }
+        },
+        ['$store.state.play.isPlayingInsertion']: function () {
+            if (this.sortType == ESortType.INSERTION) {
+                this.execPlay();
+            }
         },
     },
     computed: {
         showIndex: function () {
-            return true;
-        },
-        showNumber: function () {
             return true;
         },
     },
@@ -101,14 +157,22 @@ export default defineComponent({
             this.nextIndex = reactive.nextIndex;
             this.data = Object.assign([], reactive.data);
         },
-        execPlay: function (isPlaying) {
-            debugger;
-            this.isPlaying = isPlaying;
-            if (isPlaying) {
-                this.runToFinish();
+        execPlay: function () {
+            if (this.isPlaying) return;
+
+            this.reset();
+            this.isPlaying = true;
+            if (this.isSorted) {
+                this.reset();
+                this.isSorted = false;
             }
+            this.runToFinish();
+        },
+        onWheelEv: function (ev) {
+            if (ev.deltaY > 1) this.runNext();
         },
         runNext: function () {
+            if (this.runToFinishTimer) clearTimeout(this.runToFinishTimer);
             this.sortInstance.sortNext();
             this.updateReactiveData();
         },
@@ -121,12 +185,13 @@ export default defineComponent({
             const result = this.sortInstance.sortGen().next();
             this.updateReactiveData();
             if (!result.done) {
-                setTimeout(() => {
+                this.runToFinishTimer = setTimeout(() => {
                     this.$nextTick(() => {
                         this.runToFinish();
                     });
                 }, 50);
             } else {
+                this.isSorted = true;
                 this.isPlaying = false;
             }
         },
@@ -142,21 +207,27 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.iw-com-graph {
+    padding: 0.5vw;
+    max-width: 150px;
+}
+
 .iw-line {
     /* height: 3px; */
     font-size: 10px;
-    background: #ccc;
+    background: #aaa;
     margin: 2px;
     margin-left: 12px;
+    min-height: 3px;
 }
 
 .iw-line.active:before {
     content: ' ';
     width: 0px;
     height: 0px;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 10px solid #f44336;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 6px solid #f44336;
     position: absolute;
     left: 0;
     margin-top: -2px;

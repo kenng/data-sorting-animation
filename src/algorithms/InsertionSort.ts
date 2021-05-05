@@ -1,4 +1,4 @@
-import { IData } from 'data/data';
+import { IData } from 'src/data/index';
 import { SortBase } from './SortBase';
 
 export class InsertionSort extends SortBase {
@@ -18,6 +18,7 @@ export class InsertionSort extends SortBase {
 
             if (--this.currentIndex == 0) {
                 this.data[0].sorted = true;
+                this.data[1].sorted = true;
                 this.moveToNext();
             }
         } else {
