@@ -1,4 +1,4 @@
-import { deepClone, IData } from 'data/data';
+import { deepClone, IData } from 'src/data/index';
 
 export interface IReactiveData {
     currenIndex: number;
