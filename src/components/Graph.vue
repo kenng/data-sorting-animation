@@ -20,16 +20,16 @@
                 )
             q-icon(
                 name='redo',
-                @click='runNext'
+                @click='runNext',
+                :color='getBtnColor',
+                :disable='isSorted'
             )
             q-icon(
                 name='restart_alt',
                 @click='reset'
             )
 
-        .row.justify-start.text-left(
-            v-if='showIndex'
-        )
+        .row.justify-start.text-left
             .col.justify-start(
                 v-if='showPointerIndex'
             )
@@ -37,10 +37,10 @@
                 div currentIndex: {{ currentIndex }}
                 .row.q-ml-md
 
-        .iw-graph-data(
+        .iw-graph-data.q-ml-sm(
             @wheel.prevent='onWheelEv'
         )
-            .full-width(
+            .full-width.relative-position(
                 v-for='(item, index) in data',
                 :key='item.index'
             )
@@ -143,8 +143,8 @@ export default defineComponent({
         },
     },
     computed: {
-        showIndex: function () {
-            return true;
+        getBtnColor: function () {
+            return this.isSorted ? 'grey' : 'black';
         },
     },
     created: function () {
@@ -152,6 +152,7 @@ export default defineComponent({
     },
     methods: {
         reset: function () {
+            this.isSorted = false;
             this.sortInstance.reset();
             this.updateReactiveData();
         },
@@ -182,6 +183,7 @@ export default defineComponent({
             this.updateReactiveData();
         },
         playOnClicked: function () {
+            if (this.isSorted) this.reset();
             this.isPlaying = !this.isPlaying;
             if (this.isPlaying) this.runToFinish();
         },
@@ -226,7 +228,6 @@ export default defineComponent({
     font-size: 10px;
     background: #aaa;
     margin: 2px;
-    margin-left: 12px;
     min-height: 3px;
 }
 
@@ -238,7 +239,7 @@ export default defineComponent({
     border-bottom: 6px solid transparent;
     border-left: 6px solid #f44336;
     position: absolute;
-    left: 0;
+    left: -6px;
     margin-top: -2px;
 }
 
