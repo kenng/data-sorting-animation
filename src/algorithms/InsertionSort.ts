@@ -7,6 +7,8 @@ export class InsertionSort extends SortBase {
     }
 
     sortNext(): IData[] {
+        this.totalStep++;
+
         if (
             this.data[this.currentIndex].value <
             this.data[this.currentIndex - 1].value

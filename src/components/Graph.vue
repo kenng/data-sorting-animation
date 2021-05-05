@@ -1,6 +1,6 @@
 <template lang="pug">
-.iw-com-graph.relative-position.column
-    .col
+.iw-com-graph.column
+    .col.relative-position
         .row.justify-around.q-mb-sm(
             v-if='showController'
         )
@@ -51,6 +51,9 @@
                     span(
                         v-if='showNumber'
                     ) {{ item.value }}
+
+        .iw-total-step.
+            {{ totalStep }}
 
     .col(
         v-if='showJsonData'
@@ -106,6 +109,7 @@ export default defineComponent({
             isPlaying: false,
             isSorted: false,
             runToFinishTimer: null,
+            totalStep: 0,
         };
     },
     watch: {
@@ -155,6 +159,7 @@ export default defineComponent({
             const reactive = this.sortInstance.getReactiveData();
             this.currentIndex = reactive.currenIndex;
             this.nextIndex = reactive.nextIndex;
+            this.totalStep = reactive.totalStep;
             this.data = Object.assign([], reactive.data);
         },
         execPlay: function () {
@@ -208,6 +213,10 @@ export default defineComponent({
 
 <style scoped>
 .iw-com-graph {
+    margin-right: 8px;
+}
+
+.iw-graph-data {
     padding: 0.5vw;
     max-width: 150px;
 }
@@ -231,5 +240,18 @@ export default defineComponent({
     position: absolute;
     left: 0;
     margin-top: -2px;
+}
+
+.iw-total-step {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 3rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 3.125rem;
+    letter-spacing: normal;
+    text-shadow: 1px 1px 1px #afafafad;
+    color: #d7ccc8aa;
 }
 </style>

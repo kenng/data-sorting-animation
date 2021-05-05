@@ -3,6 +3,7 @@ import { deepClone, IData } from 'src/data/index';
 export interface IReactiveData {
     currenIndex: number;
     nextIndex: number;
+    totalStep: number;
     data: IData[];
 }
 
@@ -13,6 +14,7 @@ export abstract class SortBase {
     protected nextIndex!: number;
     protected defaultCurrentIndex: number;
     protected defaultNextIndex: number;
+    protected totalStep = 0;
 
     abstract sortNext(): IData[];
     abstract sortGen(): Generator;
@@ -26,6 +28,7 @@ export abstract class SortBase {
     }
 
     reset(): void {
+        this.totalStep = 0;
         this.currentIndex = this.defaultCurrentIndex;
         this.nextIndex = this.defaultNextIndex;
         this.data = deepClone(this.rawData);
@@ -53,6 +56,7 @@ export abstract class SortBase {
         return {
             currenIndex: this.currentIndex,
             nextIndex: this.nextIndex,
+            totalStep: this.totalStep,
             data: this.data,
         };
     }
