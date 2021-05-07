@@ -110,6 +110,7 @@ export default defineComponent({
             isSorted: false,
             runToFinishTimer: null,
             totalStep: 0,
+            gen: null,
         };
     },
     watch: {
@@ -136,8 +137,33 @@ export default defineComponent({
                 this.execPlay();
             }
         },
+        ['$store.state.play.isPlayingBubble']: function () {
+            if (this.sortType == ESortType.BUBBLE) {
+                this.execPlay();
+            }
+        },
         ['$store.state.play.isPlayingInsertion']: function () {
             if (this.sortType == ESortType.INSERTION) {
+                this.execPlay();
+            }
+        },
+        ['$store.state.play.isPlayingSelection']: function () {
+            if (this.sortType == ESortType.SELECTION) {
+                this.execPlay();
+            }
+        },
+        ['$store.state.play.isPlayingQuick']: function () {
+            if (this.sortType == ESortType.QUICK) {
+                this.execPlay();
+            }
+        },
+        ['$store.state.play.isPlayingMerge']: function () {
+            if (this.sortType == ESortType.MERGE) {
+                this.execPlay();
+            }
+        },
+        ['$store.state.play.isPlayingHeap']: function () {
+            if (this.sortType == ESortType.HEAP) {
                 this.execPlay();
             }
         },
@@ -153,6 +179,7 @@ export default defineComponent({
     methods: {
         reset: function () {
             this.isSorted = false;
+            this.gen = this.sortInstance.sortGen();
             this.sortInstance.reset();
             this.updateReactiveData();
         },
@@ -179,7 +206,7 @@ export default defineComponent({
         },
         runNext: function () {
             if (this.runToFinishTimer) clearTimeout(this.runToFinishTimer);
-            this.sortInstance.sortNext();
+            this.gen.next();
             this.updateReactiveData();
         },
         playOnClicked: function () {
@@ -189,7 +216,7 @@ export default defineComponent({
         },
         runToFinish: function () {
             if (!this.isPlaying) return;
-            const result = this.sortInstance.sortGen().next();
+            const result = this.gen.next();
             this.updateReactiveData();
             if (!result.done) {
                 this.runToFinishTimer = setTimeout(() => {

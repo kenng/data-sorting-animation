@@ -19,7 +19,12 @@ export enum EDataType {
 }
 
 export enum ESortType {
-    INSERTION = 'insert',
+    BUBBLE = 'bubble',
+    INSERTION = 'insertion',
+    SELECTION = 'selection',
+    QUICK = 'quick',
+    MERGE = 'merge',
+    HEAP = 'heap',
 }
 
 function prepData(value: number, index: number) {

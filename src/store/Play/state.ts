@@ -5,7 +5,12 @@ export interface IPlayState {
     isPlayingFewUnique: boolean;
     isPlayingNearlySorted: boolean;
 
+    isPlayingBubble: boolean;
     isPlayingInsertion: boolean;
+    isPlayingSelection: boolean;
+    isPlayingQuick: boolean;
+    isPlayingMerge: boolean;
+    isPlayingHeap: boolean;
 }
 
 function state(): IPlayState {
@@ -16,7 +21,12 @@ function state(): IPlayState {
         isPlayingFewUnique: false,
         isPlayingNearlySorted: false,
 
+        isPlayingBubble: false,
         isPlayingInsertion: false,
+        isPlayingSelection: false,
+        isPlayingQuick: false,
+        isPlayingMerge: false,
+        isPlayingHeap: false,
     };
 }
 
@@ -27,7 +37,12 @@ export class PlayState {
     static readonly MUTATAION_PlayFewUnique = 'iwm_play_few_unique';
     static readonly MUTATAION_PlayNearlySorted = 'iwm_play_nearly_sorted';
 
+    static readonly MUTATAION_PlayBubble = 'iwm_play_bubble';
     static readonly MUTATAION_PlayInsertion = 'iwm_play_insertion';
+    static readonly MUTATAION_PlaySelection = 'iwm_play_selection';
+    static readonly MUTATAION_PlayQuick = 'iwm_play_quick';
+    static readonly MUTATAION_PlayMerge = 'iwm_play_merge';
+    static readonly MUTATAION_PlayHeap = 'iwm_play_heap';
     static readonly MUTATAION_PlayReset = 'iwm_play_reset';
 }
 

@@ -19,8 +19,23 @@ export default defineComponent({
         togglePlayNearlySorted: function (): void {
             this.$store.commit(PlayState.MUTATAION_PlayNearlySorted);
         },
+        togglePlayBubble: function (): void {
+            this.$store.commit(PlayState.MUTATAION_PlayBubble);
+        },
         togglePlayInsertion: function (): void {
             this.$store.commit(PlayState.MUTATAION_PlayInsertion);
+        },
+        togglePlaySelection: function (): void {
+            this.$store.commit(PlayState.MUTATAION_PlaySelection);
+        },
+        togglePlayQuick: function (): void {
+            this.$store.commit(PlayState.MUTATAION_PlayQuick);
+        },
+        togglePlayMerge: function (): void {
+            this.$store.commit(PlayState.MUTATAION_PlayMerge);
+        },
+        togglePlayHeap: function (): void {
+            this.$store.commit(PlayState.MUTATAION_PlayHeap);
         },
     },
 });

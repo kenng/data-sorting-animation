@@ -17,8 +17,23 @@ const mutation: MutationTree<IPlayState> = {
     [PlayState.MUTATAION_PlayNearlySorted]: function (state) {
         state.isPlayingNearlySorted = !state.isPlayingNearlySorted;
     },
+    [PlayState.MUTATAION_PlayBubble]: function (state) {
+        state.isPlayingBubble = !state.isPlayingBubble;
+    },
     [PlayState.MUTATAION_PlayInsertion]: function (state) {
         state.isPlayingInsertion = !state.isPlayingInsertion;
+    },
+    [PlayState.MUTATAION_PlaySelection]: function (state) {
+        state.isPlayingSelection = !state.isPlayingSelection;
+    },
+    [PlayState.MUTATAION_PlayQuick]: function (state) {
+        state.isPlayingQuick = !state.isPlayingQuick;
+    },
+    [PlayState.MUTATAION_PlayMerge]: function (state) {
+        state.isPlayingMerge = !state.isPlayingMerge;
+    },
+    [PlayState.MUTATAION_PlayHeap]: function (state) {
+        state.isPlayingHeap = !state.isPlayingHeap;
     },
     [PlayState.MUTATAION_PlayReset]: function (state) {
         state.isPlayingAll = false;

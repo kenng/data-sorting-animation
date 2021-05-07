@@ -35,10 +35,8 @@ export abstract class SortBase {
     }
 
     sortAll(): void {
-        let result;
-        do {
-            result = this.sortGen().next();
-        } while (!result.done);
+        const g = this.sortGen();
+        while (!g.next().done);
     }
 
     // sort(callBackFn?: ISortCallbackFn): boolean {
