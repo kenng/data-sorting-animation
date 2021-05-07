@@ -2,8 +2,8 @@ import { IData } from 'src/data/index';
 import { SortBase } from './SortBase';
 
 export class BubbleSort extends SortBase {
-    constructor(rawData: IData[], currentIndex = 0, nextIndex = 0) {
-        super(rawData, currentIndex, nextIndex);
+    constructor(rawData: IData[], nextIndex = 0) {
+        super(rawData, nextIndex);
     }
 
     sortNext(): IData[] {
@@ -25,7 +25,7 @@ export class BubbleSort extends SortBase {
 
     *sortGen(): Generator {
         for (
-            this.nextIndex = 0;
+            this.nextIndex = this.defaultNextIndex;
             this.nextIndex < this.data.length;
             this.nextIndex++
         ) {

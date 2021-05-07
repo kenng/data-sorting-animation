@@ -30,6 +30,7 @@ q-page.row.items-center.justify-evenly.iw-page.iw-page-graph-index
 
         tbody
             BubbleGraph
+            SelectionGraph
             InsertionGraph
 </template>
 
@@ -39,11 +40,12 @@ import PlayMixin from 'src/mixins/play-mixin.vue';
 import PlayBtn from 'components/PlayBtn.vue';
 import InsertionGraph from 'components/graph/InsertionGraph.vue';
 import BubbleGraph from 'components/graph/BubbleGraph.vue';
+import SelectionGraph from 'components/graph/SelectionGraph.vue';
 
 export default defineComponent({
     name: 'PageIndex',
     mixins: [PlayMixin],
-    components: { PlayBtn, InsertionGraph, BubbleGraph },
+    components: { PlayBtn, InsertionGraph, BubbleGraph, SelectionGraph },
     data: function () {
         return {
             graphs: [],

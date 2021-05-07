@@ -19,10 +19,10 @@ export abstract class SortBase {
     abstract sortNext(): IData[];
     abstract sortGen(): Generator;
 
-    constructor(rawData: IData[], currentIndex: number, nextIndex: number) {
+    constructor(rawData: IData[], nextIndex: number, currentIndex?: number) {
         this.rawData = rawData;
         this.data = deepClone(this.rawData);
-        this.defaultCurrentIndex = currentIndex;
+        this.defaultCurrentIndex = currentIndex ?? nextIndex;
         this.defaultNextIndex = nextIndex;
         this.reset();
     }
@@ -39,16 +39,9 @@ export abstract class SortBase {
         while (!g.next().done);
     }
 
-    // sort(callBackFn?: ISortCallbackFn): boolean {
-    //     let result = this.sortGen().next();
-    //     if (!result.done) {
-    //         setTimeout(() => {
-    //             result = this.sortGen().next();
-    //             if (callBackFn) return callBackFn(this, result.done ?? false);
-    //         }, 50);
-    //     }
-    //     return result.done ?? false;
-    // }
+    swapData(key1: number, key2: number): void {
+        [this.data[key1], this.data[key2]] = [this.data[key2], this.data[key1]];
+    }
 
     getReactiveData(): IReactiveData {
         return {

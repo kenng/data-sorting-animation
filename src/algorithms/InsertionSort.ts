@@ -2,8 +2,8 @@ import { IData } from 'src/data/index';
 import { SortBase } from './SortBase';
 
 export class InsertionSort extends SortBase {
-    constructor(rawData: IData[], currentIndex = 1, nextIndex = 1) {
-        super(rawData, currentIndex, nextIndex);
+    constructor(rawData: IData[], nextIndex = 1, currentIndex = 1) {
+        super(rawData, nextIndex, currentIndex);
     }
 
     sortNext(): IData[] {
@@ -18,7 +18,9 @@ export class InsertionSort extends SortBase {
                 this.data[this.currentIndex - 1],
             ];
 
-            if (--this.currentIndex == 0) {
+            this.currentIndex--;
+
+            if (this.currentIndex == 0) {
                 this.data[0].sorted = true;
                 this.data[1].sorted = true;
                 this.moveToNext();
