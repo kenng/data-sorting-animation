@@ -1,6 +1,6 @@
 # Interative Data Sorting Animation
 
-![Testing](https://github.com/kenng/data-sorting-animation/actions/workflows/tests.yml/badge.svg)
+[![Testing](https://github.com/kenng/data-sorting-animation/actions/workflows/tests.yml/badge.svg)](https://github.com/kenng/data-sorting-animation/actions)
 
 ## Install the dependencies
 

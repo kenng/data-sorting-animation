@@ -11,7 +11,7 @@ module.exports = {
     },
     setupFilesAfterEnv: ['<rootDir>/test/jest/jest.setup.ts'],
     // noStackTrace: true,
-    // bail: true,
+    bail: 1,
     // cache: false,
     // verbose: true,
     // watch: true,
