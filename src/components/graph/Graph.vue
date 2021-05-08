@@ -35,6 +35,8 @@
             )
                 div nextIndex: {{ nextIndex }}
                 div currentIndex: {{ currentIndex }}
+                div secondMarkerIndex: {{ secondMarkerIndex }}
+                div thirdMarkerIndex: {{ thirdMarkerIndex }}
                 .row.q-ml-md
 
         .iw-graph-data.q-ml-sm(
@@ -45,7 +47,7 @@
                 :key='item.index'
             )
                 .iw-line(
-                    :class='{ active: index == currentIndex }',
+                    :class='{ active: index == currentIndex, pointer: index == secondMarkerIndex || index == thirdMarkerIndex }',
                     :style='getStyle(item)'
                 )
                     span(
@@ -105,12 +107,14 @@ export default defineComponent({
             data: [] as IData[],
             currentIndex: -1,
             nextIndex: -1,
+            secondMarkerIndex: -1,
+            thirdMarkerIndex: -1,
             theSortInstance: null,
             isPlaying: false,
             isSorted: false,
             runToFinishTimer: null,
             totalStep: 0,
-            gen: null,
+            iter: null,
         };
     },
     watch: {
@@ -179,7 +183,7 @@ export default defineComponent({
     methods: {
         reset: function () {
             this.isSorted = false;
-            this.gen = this.sortInstance.sortGen();
+            this.iter = this.sortInstance.sortGen();
             this.sortInstance.reset();
             this.updateReactiveData();
         },
@@ -187,6 +191,8 @@ export default defineComponent({
             const reactive = this.sortInstance.getReactiveData();
             this.currentIndex = reactive.currenIndex;
             this.nextIndex = reactive.nextIndex;
+            this.secondMarkerIndex = reactive.secondMarkerIndex;
+            this.thirdMarkerIndex = reactive.thirdMarkerIndex;
             this.totalStep = reactive.totalStep;
             this.data = Object.assign([], reactive.data);
         },
@@ -206,7 +212,7 @@ export default defineComponent({
         },
         runNext: function () {
             if (this.runToFinishTimer) clearTimeout(this.runToFinishTimer);
-            this.gen.next();
+            this.iter.next();
             this.updateReactiveData();
         },
         playOnClicked: function () {
@@ -216,7 +222,7 @@ export default defineComponent({
         },
         runToFinish: function () {
             if (!this.isPlaying) return;
-            const result = this.gen.next();
+            const result = this.iter.next();
             this.updateReactiveData();
             if (!result.done) {
                 this.runToFinishTimer = setTimeout(() => {
@@ -258,6 +264,18 @@ export default defineComponent({
     min-height: 3px;
 }
 
+.iw-line.pointer:before {
+    content: ' ';
+    width: 0px;
+    height: 0px;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 6px solid blue;
+    position: absolute;
+    left: -6px;
+    margin-top: -5px;
+}
+
 .iw-line.active:before {
     content: ' ';
     width: 0px;
@@ -267,7 +285,7 @@ export default defineComponent({
     border-left: 6px solid #f44336;
     position: absolute;
     left: -6px;
-    margin-top: -2px;
+    margin-top: -5px;
 }
 
 .iw-total-step {
