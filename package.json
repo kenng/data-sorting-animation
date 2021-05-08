@@ -1,8 +1,8 @@
 {
-    "name": "jaripagewebts",
+    "name": "data-sorting-animation",
     "version": "0.0.1",
-    "description": "A Quasar Framework app",
-    "productName": "Quasar App",
+    "description": "Data Sorting Algorithm Animation",
+    "productName": "Data Sorting Algorithm Animation",
     "author": "Ken Ng <kenng@itwonders.co>",
     "private": true,
     "scripts": {

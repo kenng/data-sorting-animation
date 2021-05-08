@@ -44,10 +44,10 @@
         )
             .full-width.relative-position(
                 v-for='(item, index) in data',
-                :key='item.index'
+                :key='index'
             )
                 .iw-line(
-                    :class='{ active: index == currentIndex, pointer: index == secondMarkerIndex || index == thirdMarkerIndex }',
+                    :class='getClassName(index)',
                     :style='getStyle(item)'
                 )
                     span(
@@ -234,6 +234,14 @@ export default defineComponent({
                 this.isSorted = true;
                 this.isPlaying = false;
             }
+        },
+        getClassName: function (index: number) {
+            return {
+                active: index == this.currentIndex,
+                pointer:
+                    index == this.secondMarkerIndex ||
+                    index == this.thirdMarkerIndex,
+            };
         },
         getStyle: function (item: IData) {
             let percent = (item.value / 1000) * 100;

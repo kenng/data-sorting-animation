@@ -33,6 +33,7 @@ q-page.row.items-center.justify-evenly.iw-page.iw-page-graph-index
             SelectionGraph
             InsertionGraph
             QuickGraph
+            MergeGraph
 </template>
 
 <script lang="ts">
@@ -43,6 +44,7 @@ import InsertionGraph from 'components/graph/InsertionGraph.vue';
 import SelectionGraph from 'components/graph/SelectionGraph.vue';
 import BubbleGraph from 'components/graph/BubbleGraph.vue';
 import QuickGraph from 'components/graph/QuickGraph.vue';
+import MergeGraph from 'components/graph/MergeGraph.vue';
 
 export default defineComponent({
     name: 'PageIndex',
@@ -53,6 +55,7 @@ export default defineComponent({
         BubbleGraph,
         SelectionGraph,
         QuickGraph,
+        MergeGraph,
     },
     data: function () {
         return {
