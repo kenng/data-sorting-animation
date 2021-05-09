@@ -269,7 +269,7 @@ export default defineComponent({
     font-size: 10px;
     background: #aaa;
     margin: 2px;
-    min-height: 3px;
+    min-height: 2px;
 }
 
 .iw-line.pointer:before {
