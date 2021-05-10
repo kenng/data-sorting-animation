@@ -39,6 +39,15 @@ const mutation: MutationTree<IPlayState> = {
         state.isPlayingAll = false;
         state.isPlayingInsertion = false;
     },
+    [PlayState.MUTATAION_TogglePlayController]: function (state) {
+        state.isShowPlayController = !state.isShowPlayController;
+    },
+    [PlayState.MUTATAION_ToggleShowTotalStep]: function (state) {
+        state.isShowTotalStep = !state.isShowTotalStep;
+    },
+    [PlayState.MUTATAION_ToggleShowNumber]: function (state) {
+        state.isShowNumber = !state.isShowNumber;
+    },
 };
 
 export default mutation;

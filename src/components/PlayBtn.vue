@@ -1,6 +1,6 @@
 <template lang="pug">
 .iw-com-play-btn
-    q-btn(
+    q-btn.iw-text-accent(
         flat,
         @click='onClickFn'
     )
@@ -10,7 +10,7 @@
                     :name='icon',
                     :size='size'
                 )
-            .row {{ label }}
+            .row.iw-text-label {{ label }}
 </template>
 
 <script lang="ts">

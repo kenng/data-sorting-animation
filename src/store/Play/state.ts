@@ -11,6 +11,10 @@ export interface IPlayState {
     isPlayingQuick: boolean;
     isPlayingMerge: boolean;
     isPlayingHeap: boolean;
+
+    isShowPlayController: boolean;
+    isShowTotalStep: boolean;
+    isShowNumber: boolean;
 }
 
 function state(): IPlayState {
@@ -27,6 +31,10 @@ function state(): IPlayState {
         isPlayingQuick: false,
         isPlayingMerge: false,
         isPlayingHeap: false,
+
+        isShowPlayController: true,
+        isShowTotalStep: true,
+        isShowNumber: false,
     };
 }
 
@@ -44,6 +52,10 @@ export class PlayState {
     static readonly MUTATAION_PlayMerge = 'iwm_play_merge';
     static readonly MUTATAION_PlayHeap = 'iwm_play_heap';
     static readonly MUTATAION_PlayReset = 'iwm_play_reset';
+
+    static readonly MUTATAION_TogglePlayController = 'iwm_toggle_play_ctrl';
+    static readonly MUTATAION_ToggleShowTotalStep = 'iwm_toggle_show_step';
+    static readonly MUTATAION_ToggleShowNumber = 'iwm_toggle_show_number';
 }
 
 export default state;

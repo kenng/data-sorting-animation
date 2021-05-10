@@ -2,7 +2,7 @@
 .iw-com-graph.column
     .col.relative-position
         .row.justify-around.q-mb-sm(
-            v-if='showController'
+            v-if='isShowPlayController'
         )
             template(
                 v-if='!isPlaying'
@@ -11,6 +11,11 @@
                     name='play_arrow',
                     @click='playOnClicked'
                 )
+                    q-tooltip(
+                        anchor='center right',
+                        self='center left',
+                        :offset='[10, 10]'
+                    ) Play
             template(
                 v-else
             )
@@ -18,16 +23,31 @@
                     name='pause',
                     @click='playOnClicked'
                 )
+                    q-tooltip(
+                        anchor='center right',
+                        self='center left',
+                        :offset='[10, 10]'
+                    ) Pause
             q-icon(
                 name='redo',
                 @click='runNext',
                 :color='getBtnColor',
                 :disable='isSorted'
             )
+                q-tooltip(
+                    anchor='center right',
+                    self='center left',
+                    :offset='[10, 10]'
+                ) Next
             q-icon(
                 name='restart_alt',
                 @click='reset'
             )
+                q-tooltip(
+                    anchor='center right',
+                    self='center left',
+                    :offset='[10, 10]'
+                ) Reset
 
         .row.justify-start.text-left
             .col.justify-start(
@@ -47,15 +67,16 @@
                 :key='index'
             )
                 .iw-line(
-                    :class='getClassName(index)',
+                    :class='getClassName(item, index)',
                     :style='getStyle(item)'
                 )
                     span(
-                        v-if='showNumber'
+                        v-if='isShowNumber'
                     ) {{ item.value }}
 
-        .iw-total-step.
-            {{ totalStep }}
+        .iw-total-step(
+            v-if='isShowTotalStep'
+        ) {{ totalStep }}
 
     .col(
         v-if='showJsonData'
@@ -83,26 +104,17 @@ export default defineComponent({
             type: String as PropType<ESortType>,
             required: true,
         },
-        showController: {
-            type: Boolean,
-            default: true,
-        },
-        showNumber: {
-            type: Boolean,
-            default: false,
-        },
         showPointerIndex: {
             type: Boolean,
             default: false,
-        },
-        showTotalStep: {
-            type: Boolean,
-            default: true,
         },
     },
     components: {},
     data: function () {
         return {
+            isShowPlayController: null,
+            isShowTotalStep: null,
+            isShowNumber: null,
             showJsonData: false,
             data: [] as IData[],
             currentIndex: -1,
@@ -171,15 +183,29 @@ export default defineComponent({
                 this.execPlay();
             }
         },
+        ['$store.state.play.isShowPlayController']: function (value) {
+            this.isShowPlayController = value;
+        },
+        ['$store.state.play.isShowTotalStep']: function (value) {
+            this.isShowTotalStep = value;
+        },
+        ['$store.state.play.isShowNumber']: function (value) {
+            this.isShowNumber = value;
+        },
     },
     computed: {
         getBtnColor: function () {
-            return this.isSorted ? 'grey' : 'black';
+            const active = this.$q.dark.isActive ? 'white' : 'black';
+            return this.isSorted ? 'grey-9' : active;
         },
     },
     created: function () {
+        this.isShowPlayController = this.$store.state.play.isShowPlayController;
+        this.isShowTotalStep = this.$store.state.play.isShowTotalStep;
+        this.isShowNumber = this.$store.state.play.isShowNumber;
         this.reset();
     },
+    mounted: function () {},
     methods: {
         reset: function () {
             this.isSorted = false;
@@ -235,18 +261,18 @@ export default defineComponent({
                 this.isPlaying = false;
             }
         },
-        getClassName: function (index: number) {
+        getClassName: function (item, index: number) {
             return {
                 active: index == this.currentIndex,
                 pointer:
                     index == this.secondMarkerIndex ||
                     index == this.thirdMarkerIndex,
+                sorted: item.sorted ?? false,
             };
         },
         getStyle: function (item: IData) {
             let percent = (item.value / 1000) * 100;
             let css = `width: ${percent}%;`;
-            if (item.sorted) css += 'background: black; color: white;';
 
             return css;
         },
@@ -267,7 +293,7 @@ export default defineComponent({
 .iw-line {
     /* height: 3px; */
     font-size: 10px;
-    background: #aaa;
+    background: #797979;
     margin: 2px;
     min-height: 2px;
 }
@@ -282,6 +308,15 @@ export default defineComponent({
     position: absolute;
     left: -6px;
     margin-top: -5px;
+}
+
+.iw-line.sorted {
+    background: black;
+    background: linear-gradient(to right, #9cecfb, #65c7f7, #0052d4);
+}
+
+.body--dark .iw-line.sorted {
+    background: linear-gradient(to right, #44b5f7, #2b32b2);
 }
 
 .iw-line.active:before {
@@ -306,6 +341,16 @@ export default defineComponent({
     line-height: 3.125rem;
     letter-spacing: normal;
     text-shadow: 1px 1px 1px #afafafad;
+    /* color: #236b6b; */
+    color: grey;
+    background: #ffffff87;
+    width: 100%;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.body--dark .iw-total-step {
     color: #d7ccc8aa;
+    background: initial;
 }
 </style>

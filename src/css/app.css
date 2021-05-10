@@ -1,3 +1,44 @@
+:root {
+    --accent-light: #053c3c;
+    --accent-dark: #7bcece;
+    --text-label: #eee;
+    --btn-active-light: #3f91d8;
+    --btn-active-dark: #ffff6a;
+}
+
+body {
+    transition: background 0.8s ease-out;
+}
+
+.body .iw-text-accent {
+    color: var(--accent-light);
+}
+
+.body--dark .iw-text-accent {
+    color: var(--accent-dark);
+}
+
+.body--dark .iw-text-label {
+    color: var(--text-label);
+}
+
+.iw-active {
+    color: var(--btn-active-light);
+}
+
+.body--dark .iw-active {
+    color: var(--btn-active-dark);
+}
+
 .iw-page {
     margin-bottom: 100px;
+}
+
+@keyframes iw-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

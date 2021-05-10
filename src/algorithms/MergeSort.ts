@@ -1,4 +1,4 @@
-import { deepClone, IData } from 'src/data/index';
+import { IData } from 'src/data/index';
 import { SortBase } from './SortBase';
 
 export class MergeSort extends SortBase {

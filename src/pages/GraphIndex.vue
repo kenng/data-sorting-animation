@@ -1,40 +1,45 @@
 <template lang="pug">
-q-page.row.items-center.justify-evenly.iw-page.iw-page-graph-index
-    table.col-md-8.col-xs-12
-        thead
-            th
-                PlayBtn(
-                    :onClickFn='togglePlayAll',
-                    label='All'
-                )
-            th
-                PlayBtn(
-                    :onClickFn='togglePlayRandom',
-                    label='Random'
-                )
-            th
-                PlayBtn(
-                    :onClickFn='togglePlayReversed',
-                    label='Reversed'
-                )
-            th
-                PlayBtn(
-                    :onClickFn='togglePlayFewUnique',
-                    label='Few Uniqued'
-                )
-            th
-                PlayBtn(
-                    :onClickFn='togglePlayNearlySorted',
-                    label='Nearly Sorted'
-                )
+q-page.row.items-center.justify-evenly.iw-page.iw-page-graph-index.q-mt-lg
+    .col-md-8.col-xs-12.row
+        table.col
+            thead
+                th
+                    PlayBtn(
+                        :onClickFn='togglePlayAll',
+                        label='All'
+                    )
+                th
+                    PlayBtn(
+                        :onClickFn='togglePlayRandom',
+                        label='Random'
+                    )
+                th
+                    PlayBtn(
+                        :onClickFn='togglePlayReversed',
+                        label='Reversed'
+                    )
+                th
+                    PlayBtn(
+                        :onClickFn='togglePlayFewUnique',
+                        label='Few Uniqued'
+                    )
+                th
+                    PlayBtn(
+                        :onClickFn='togglePlayNearlySorted',
+                        label='Nearly Sorted'
+                    )
 
-        tbody
-            BubbleGraph
-            SelectionGraph
-            InsertionGraph
-            QuickGraph
-            MergeGraph
-            HeapGraph
+            tbody
+                BubbleGraph
+                SelectionGraph
+                InsertionGraph
+                QuickGraph
+                MergeGraph
+                HeapGraph
+
+        GraphOptions.col-1.q-ml-sm.q-mt-lg(
+            v-if='$q.screen.gt.xs'
+        )
 </template>
 
 <script lang="ts">
@@ -47,6 +52,7 @@ import BubbleGraph from 'components/graph/BubbleGraph.vue';
 import QuickGraph from 'components/graph/QuickGraph.vue';
 import MergeGraph from 'components/graph/MergeGraph.vue';
 import HeapGraph from 'components/graph/HeapGraph.vue';
+import GraphOptions from 'src/components/graph/GraphOptions.vue';
 
 export default defineComponent({
     name: 'PageIndex',
@@ -59,6 +65,7 @@ export default defineComponent({
         QuickGraph,
         MergeGraph,
         HeapGraph,
+        GraphOptions,
     },
     data: function () {
         return {
@@ -77,8 +84,12 @@ export default defineComponent({
 .iw-page-graph-index table,
 .iw-page-graph-index th,
 .iw-page-graph-index td {
-    border: 1px solid #aaa;
+    border: 1px solid #aaaaaa6b;
     border-collapse: collapse;
+}
+
+.body--dark .iw-page-graph-index td {
+    border: 1px solid #aaaaaa45;
 }
 
 @media (max-width: 599px) {
