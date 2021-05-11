@@ -10,6 +10,10 @@ body {
     transition: background 0.8s ease-out;
 }
 
+body.body--dark {
+    background: #0d0221;
+}
+
 .body .iw-text-accent {
     color: var(--accent-light);
 }
@@ -32,6 +36,14 @@ body {
 
 .iw-page {
     margin-bottom: 100px;
+}
+
+.material-icons {
+    cursor: pointer;
+}
+
+.iw-spin.material-icons:hover {
+    animation: iw-spin 1s ease 1;
 }
 
 @keyframes iw-spin {

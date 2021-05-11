@@ -7,7 +7,7 @@ const routes: RouteConfig[] = [
         children: [
             {
                 path: '',
-                component: () => import('src/components/graph/GraphIndex.vue'),
+                component: () => import('src/pages/HomePage.vue'),
             },
         ],
     },
