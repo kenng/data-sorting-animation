@@ -1,18 +1,22 @@
 <template lang="pug">
-.iw-com-graph-icon.column.flex-center
-    q-icon.row.iw-anim(
-        name='settings',
-        @click='expandOptions'
-    )
-        q-tooltip(
-            anchor='center right',
-            self='center left',
-            :offset='[10, 10]'
-        ) Options
+.iw-com-graph-icon(
+    :class='getComClassName()'
+)
+    .iw-icon-box.iw-icon-settings
+        q-icon.iw-anim(
+            name='settings',
+            :class='getClassName()',
+            @click='expandOptions'
+        )
+            q-tooltip(
+                anchor='center right',
+                self='center left',
+                :offset='[10, 10]'
+            ) Options
 
     transition(
         name='custom-classes-transition',
-        enter-active-class='animated fadeInDown',
+        :enter-active-class='getAnimatedClass()',
         mode='out-in'
     )
         .iw-icon-box(
@@ -26,8 +30,9 @@
                 template(
                     v-if='$q.dark.isActive'
                 )
-                    q-icon.row.iw-active(
+                    q-icon.iw-active(
                         name='wb_sunny',
+                        :class='getClassName()',
                         key='sunny',
                         @click='$q.dark.toggle()'
                     )
@@ -39,8 +44,9 @@
                 template(
                     v-else
                 )
-                    q-icon.row.iw-active(
+                    q-icon.iw-active(
                         name='nightlight',
+                        :class='getClassName()',
                         key='night',
                         @click='$q.dark.toggle()'
                     )
@@ -49,9 +55,9 @@
                             self='center left',
                             :offset='[10, 10]'
                         ) Switch to Dark Mode
-            q-icon.row.q-mt-lg(
+            q-icon(
                 name='video_settings',
-                :class='{ "iw-active": $store.state.play.isShowPlayController }',
+                :class='getClassName({ "iw-active": $store.state.play.isShowPlayController })',
                 @click='togglePlayController'
             )
                 q-tooltip(
@@ -60,9 +66,9 @@
                     :offset='[10, 10]'
                 ) Toggle Play Controller
 
-            q-icon.row.q-mt-lg(
+            q-icon(
                 name='pin',
-                :class='{ "iw-active": $store.state.play.isShowTotalStep }',
+                :class='getClassName({ "iw-active": $store.state.play.isShowTotalStep })',
                 @click='toggleShowTotalStep'
             )
                 q-tooltip(
@@ -71,9 +77,9 @@
                     :offset='[10, 10]'
                 ) Toggle Total Steps
 
-            q-icon.row.q-mt-lg(
+            q-icon(
                 name='analytics',
-                :class='{ "iw-active": $store.state.play.isShowNumber }',
+                :class='getClassName({ "iw-active": $store.state.play.isShowNumber })',
                 @click='toggleShowNumber'
             )
                 q-tooltip(
@@ -95,11 +101,14 @@ export default defineComponent({
     data: function () {
         return {
             isShowOption: true,
+            isScreenGtXs: null,
         };
     },
     watch: {},
     computed: {},
-    created: function () {},
+    created: function () {
+        this.isScreenGtXs = this.$q.screen.gt.xs;
+    },
     mounted: function () {},
     methods: {
         expandOptions: function () {
@@ -113,6 +122,32 @@ export default defineComponent({
         },
         toggleShowNumber: function () {
             this.$store.commit(PlayState.MUTATAION_ToggleShowNumber);
+        },
+        getComClassName: function () {
+            if (this.isScreenGtXs) {
+                return {
+                    column: true,
+                    'flex-center': true,
+                };
+            }
+
+            return {
+                row: true,
+                reverse: true,
+                'items-end': true,
+            };
+        },
+        getClassName: function (extra) {
+            return {
+                // col: !this.isScreenGtXs,
+                row: this.isScreenGtXs,
+                ...extra,
+            };
+        },
+        getAnimatedClass: function () {
+            let name = 'animated ';
+            if (this.isScreenGtXs) return name + 'fadeInDown';
+            return name + 'fadeInRight';
         },
     },
 });
@@ -140,8 +175,37 @@ export default defineComponent({
     padding-bottom: 20px;
     padding-left: 8px;
     padding-right: 8px;
+    border-radius: 50px;
+    margin-bottom: 8px;
+}
+
+.iw-com-graph-icon .q-icon {
     margin-top: 15px;
     margin-bottom: 15px;
-    border-radius: 50px;
+}
+
+.iw-com-graph-icon .iw-icon-settings {
+    border-color: transparent;
+}
+
+@media screen and (max-width: 599px) {
+    .iw-com-graph-icon .iw-icon-box {
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .iw-com-graph-icon .q-icon {
+        margin-left: 15px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    .iw-com-graph-icon .iw-icon-settings {
+        padding-left: initial;
+        padding-right: 15px;
+        border-color: transparent;
+    }
 }
 </style>

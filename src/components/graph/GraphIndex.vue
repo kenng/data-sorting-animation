@@ -1,6 +1,11 @@
 <template lang="pug">
 q-page.row.items-center.justify-evenly.iw-page.iw-page-graph-index.q-mt-lg
     .col-md-8.col-xs-12.row
+        GraphOptions.col.q-ml-sm.q-mt-lg(
+            v-if='$q.screen.xs'
+        )
+
+    .col-md-8.col-xs-12.row
         table.col
             thead
                 th
