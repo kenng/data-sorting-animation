@@ -1,5 +1,5 @@
 <template lang="pug">
-q-page.row.items-center.justify-evenly.iw-page.iw-page-graph-index.q-mt-lg
+.row.items-center.justify-evenly.iw-page-graph-index.q-mt-md
     .col-md-8.col-xs-12.row
         GraphOptions.col.q-ml-sm.q-mt-lg(
             v-if='$q.screen.xs'
@@ -82,6 +82,10 @@ export default defineComponent({
 </script>
 
 <style>
+.iw-page-graph-index th {
+    height: 85px;
+}
+
 .iw-page-graph-index td {
     width: 20%;
 }
@@ -99,9 +103,13 @@ export default defineComponent({
 
 @media (max-width: 599px) {
     .iw-page-graph-index th .q-btn__wrapper {
-        /* font-size: 10px; */
+        font-size: 11px;
         padding: 5px;
-        min-width: 81px;
+        min-width: 70px;
+    }
+
+    .iw-page-graph-index th:first-child .q-btn__wrapper {
+        min-width: 50px;
     }
 }
 </style>

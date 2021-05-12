@@ -171,8 +171,8 @@ export default defineComponent({
 
 .iw-com-graph-icon .iw-icon-box {
     border: 1px solid #ccc;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     padding-left: 8px;
     padding-right: 8px;
     border-radius: 50px;
@@ -180,8 +180,8 @@ export default defineComponent({
 }
 
 .iw-com-graph-icon .q-icon {
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .iw-com-graph-icon .iw-icon-settings {
@@ -192,7 +192,8 @@ export default defineComponent({
     .iw-com-graph-icon .iw-icon-box {
         padding-top: 4px;
         padding-bottom: 4px;
-        padding-left: 30px;
+        /* another 15px from .q-icon margin-left, so total still 30px for left space */
+        padding-left: 15px;
         padding-right: 30px;
     }
 

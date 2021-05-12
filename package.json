@@ -6,6 +6,7 @@
     "author": "Ken Ng <kenng@itwonders.co>",
     "private": true,
     "scripts": {
+        "gh-pages": "quasar build && if [ -d ../data-sorting-animation-gh-pages/ ]; then rm -rf ../data-sorting-animation-gh-pages/* && mv dist/spa/* ../data-sorting-animation-gh-pages/; fi",
         "lint": "eslint --ext .js,.ts,.vue ./",
         "test": "echo \"See package.json => scripts for available tests.\" && exit 0",
         "test:unit": "jest --updateSnapshot",

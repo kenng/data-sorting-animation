@@ -47,4 +47,8 @@ export default defineComponent({
 });
 </script>
 
-<style></style>
+<style>
+.iw-com-play-btn .iw-text-label {
+    line-height: 1.5;
+}
+</style>

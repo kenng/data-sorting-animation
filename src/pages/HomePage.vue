@@ -1,6 +1,14 @@
 <template lang="pug">
 q-page.iw-page.iw-page-home
+    h4.text-center Visualizing Sorting Algorithms
+        .text-subtitle1 with interactive animation
+
     GraphIndex
+
+    .q-mt-xs.text-center Graph animation was inspired by&nbsp;
+        a.q-link(
+            href='https://www.toptal.com/developers/sorting-algorithms'
+        ) Toptal
 </template>
 
 <script lang="ts">
