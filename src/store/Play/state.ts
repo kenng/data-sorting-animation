@@ -41,25 +41,25 @@ function state(): IPlayState {
 }
 
 export class PlayState {
-    static readonly MUTATAION_LastUpdatedAt = 'iwm_last_updated_at';
+    static readonly MUTATION_LastUpdatedAt = 'iwm_last_updated_at';
 
-    static readonly MUTATAION_PlayAll = 'iwm_play_all';
-    static readonly MUTATAION_PlayRandom = 'iwm_play_random';
-    static readonly MUTATAION_PlayReversed = 'iwm_play_reversed';
-    static readonly MUTATAION_PlayFewUnique = 'iwm_play_few_unique';
-    static readonly MUTATAION_PlayNearlySorted = 'iwm_play_nearly_sorted';
+    static readonly MUTATION_PlayAll = 'iwm_play_all';
+    static readonly MUTATION_PlayRandom = 'iwm_play_random';
+    static readonly MUTATION_PlayReversed = 'iwm_play_reversed';
+    static readonly MUTATION_PlayFewUnique = 'iwm_play_few_unique';
+    static readonly MUTATION_PlayNearlySorted = 'iwm_play_nearly_sorted';
 
-    static readonly MUTATAION_PlayBubble = 'iwm_play_bubble';
-    static readonly MUTATAION_PlayInsertion = 'iwm_play_insertion';
-    static readonly MUTATAION_PlaySelection = 'iwm_play_selection';
-    static readonly MUTATAION_PlayQuick = 'iwm_play_quick';
-    static readonly MUTATAION_PlayMerge = 'iwm_play_merge';
-    static readonly MUTATAION_PlayHeap = 'iwm_play_heap';
-    static readonly MUTATAION_PlayReset = 'iwm_play_reset';
+    static readonly MUTATION_PlayBubble = 'iwm_play_bubble';
+    static readonly MUTATION_PlayInsertion = 'iwm_play_insertion';
+    static readonly MUTATION_PlaySelection = 'iwm_play_selection';
+    static readonly MUTATION_PlayQuick = 'iwm_play_quick';
+    static readonly MUTATION_PlayMerge = 'iwm_play_merge';
+    static readonly MUTATION_PlayHeap = 'iwm_play_heap';
+    static readonly MUTATION_PlayReset = 'iwm_play_reset';
 
-    static readonly MUTATAION_TogglePlayController = 'iwm_toggle_play_ctrl';
-    static readonly MUTATAION_ToggleShowTotalStep = 'iwm_toggle_show_step';
-    static readonly MUTATAION_ToggleShowNumber = 'iwm_toggle_show_number';
+    static readonly MUTATION_TogglePlayController = 'iwm_toggle_play_ctrl';
+    static readonly MUTATION_ToggleShowTotalStep = 'iwm_toggle_show_step';
+    static readonly MUTATION_ToggleShowNumber = 'iwm_toggle_show_number';
 }
 
 export default state;

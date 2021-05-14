@@ -97,3 +97,13 @@ export const setNewData = {
 export function getDataValue(theData: IData[]): number[] {
     return theData.map((item) => item.value);
 }
+
+export function getlargestValue(theData: IData[]): number {
+    let largest = 0;
+    theData.map((item) => {
+        if (item.value > largest) {
+            largest = item.value;
+        }
+    });
+    return largest;
+}

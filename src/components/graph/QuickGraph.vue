@@ -35,7 +35,6 @@ export default defineComponent({
     watch: {},
     computed: {},
     created: function () {
-        console.log('graph created');
         this.graphs = [
             {
                 graph: new QuickSort(data.random()),

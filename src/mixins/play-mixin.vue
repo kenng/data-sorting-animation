@@ -5,37 +5,37 @@ import { PlayState } from 'store/Play/state';
 export default defineComponent({
     methods: {
         togglePlayAll: function (): void {
-            this.$store.commit(PlayState.MUTATAION_PlayAll);
+            this.$store.commit(PlayState.MUTATION_PlayAll);
         },
         togglePlayRandom: function (): void {
-            this.$store.commit(PlayState.MUTATAION_PlayRandom);
+            this.$store.commit(PlayState.MUTATION_PlayRandom);
         },
         togglePlayReversed: function (): void {
-            this.$store.commit(PlayState.MUTATAION_PlayReversed);
+            this.$store.commit(PlayState.MUTATION_PlayReversed);
         },
         togglePlayFewUnique: function (): void {
-            this.$store.commit(PlayState.MUTATAION_PlayFewUnique);
+            this.$store.commit(PlayState.MUTATION_PlayFewUnique);
         },
         togglePlayNearlySorted: function (): void {
-            this.$store.commit(PlayState.MUTATAION_PlayNearlySorted);
+            this.$store.commit(PlayState.MUTATION_PlayNearlySorted);
         },
         togglePlayBubble: function (): void {
-            this.$store.commit(PlayState.MUTATAION_PlayBubble);
+            this.$store.commit(PlayState.MUTATION_PlayBubble);
         },
         togglePlayInsertion: function (): void {
-            this.$store.commit(PlayState.MUTATAION_PlayInsertion);
+            this.$store.commit(PlayState.MUTATION_PlayInsertion);
         },
         togglePlaySelection: function (): void {
-            this.$store.commit(PlayState.MUTATAION_PlaySelection);
+            this.$store.commit(PlayState.MUTATION_PlaySelection);
         },
         togglePlayQuick: function (): void {
-            this.$store.commit(PlayState.MUTATAION_PlayQuick);
+            this.$store.commit(PlayState.MUTATION_PlayQuick);
         },
         togglePlayMerge: function (): void {
-            this.$store.commit(PlayState.MUTATAION_PlayMerge);
+            this.$store.commit(PlayState.MUTATION_PlayMerge);
         },
         togglePlayHeap: function (): void {
-            this.$store.commit(PlayState.MUTATAION_PlayHeap);
+            this.$store.commit(PlayState.MUTATION_PlayHeap);
         },
     },
 });

@@ -115,13 +115,13 @@ export default defineComponent({
             this.isShowOption = !this.isShowOption;
         },
         togglePlayController: function () {
-            this.$store.commit(PlayState.MUTATAION_TogglePlayController);
+            this.$store.commit(PlayState.MUTATION_TogglePlayController);
         },
         toggleShowTotalStep: function () {
-            this.$store.commit(PlayState.MUTATAION_ToggleShowTotalStep);
+            this.$store.commit(PlayState.MUTATION_ToggleShowTotalStep);
         },
         toggleShowNumber: function () {
-            this.$store.commit(PlayState.MUTATAION_ToggleShowNumber);
+            this.$store.commit(PlayState.MUTATION_ToggleShowNumber);
         },
         getComClassName: function () {
             if (this.isScreenGtXs) {

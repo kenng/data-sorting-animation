@@ -89,7 +89,7 @@ export default defineComponent({
         GraphOptions,
         GraphData,
     },
-    computed: {
+    watch: {
         ['$store.state.play.lastUpdatedAt']: function () {
             this.lastUpdated = this.$store.state.play.lastUpdatedAt;
         },

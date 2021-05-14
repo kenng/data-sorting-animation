@@ -103,7 +103,7 @@ export default defineComponent({
             try {
                 this.dataTemp[this.dataType] = this.data;
                 setNewData[this.dataType](this.data);
-                this.$store.commit(PlayState.MUTATAION_LastUpdatedAt);
+                this.$store.commit(PlayState.MUTATION_LastUpdatedAt);
 
                 // reset to null if no error got throw
                 this.dataTemp[this.dataType] = null;

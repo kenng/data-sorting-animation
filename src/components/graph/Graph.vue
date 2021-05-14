@@ -87,7 +87,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api';
-import { EDataType, IData, ESortType } from 'src/data';
+import { EDataType, IData, ESortType, getlargestValue } from 'src/data';
 import { SortBase } from 'algorithms/SortBase';
 
 export default defineComponent({
@@ -112,6 +112,7 @@ export default defineComponent({
     components: {},
     data: function () {
         return {
+            largestValue: null,
             isShowPlayController: null,
             isShowTotalStep: null,
             isShowNumber: null,
@@ -204,6 +205,7 @@ export default defineComponent({
         this.isShowTotalStep = this.$store.state.play.isShowTotalStep;
         this.isShowNumber = this.$store.state.play.isShowNumber;
         this.reset();
+        this.largestValue = getlargestValue(this.data);
     },
     mounted: function () {},
     methods: {
@@ -271,7 +273,7 @@ export default defineComponent({
             };
         },
         getStyle: function (item: IData) {
-            let percent = (item.value / 1000) * 100;
+            let percent = (item.value / this.largestValue) * 100;
             let css = `width: ${percent}%;`;
 
             return css;
