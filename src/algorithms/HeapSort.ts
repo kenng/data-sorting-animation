@@ -41,7 +41,11 @@ export class HeapSort extends SortBase {
     *heapSort() {
         const len = this.data.length;
         // max heap
-        for (let parentIndex = len / 2 - 1; parentIndex >= 0; parentIndex--) {
+        for (
+            let parentIndex = Math.floor(len / 2 - 1);
+            parentIndex >= 0;
+            parentIndex--
+        ) {
             yield* this.heapify(len, parentIndex);
         }
 

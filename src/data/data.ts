@@ -44,7 +44,7 @@ const reversed = [
     48,
 ];
 
-const few_unique = [
+const fewUnique = [
     688,
     401,
     251,
@@ -67,7 +67,7 @@ const few_unique = [
     688,
 ];
 
-const nearly_sorted = [
+const nearlySorted = [
     48,
     82,
     105,
@@ -139,8 +139,8 @@ const sorted_few_unique = [
 export default {
     random,
     reversed,
-    few_unique,
-    nearly_sorted,
+    fewUnique,
+    nearlySorted,
 };
 
 export const sorted = {

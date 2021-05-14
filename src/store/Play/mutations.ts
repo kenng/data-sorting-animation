@@ -2,6 +2,9 @@ import { MutationTree } from 'vuex';
 import { IPlayState, PlayState } from './state';
 
 const mutation: MutationTree<IPlayState> = {
+    [PlayState.MUTATAION_LastUpdatedAt]: function (state) {
+        state.lastUpdatedAt = new Date().getTime();
+    },
     [PlayState.MUTATAION_PlayAll]: function (state) {
         state.isPlayingAll = !state.isPlayingAll;
     },

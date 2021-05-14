@@ -25,7 +25,7 @@ import { QuickSort } from 'algorithms/QuickSort';
 import { data, EDataType, ESortType } from 'src/data';
 
 export default defineComponent({
-    name: 'InsertionGraph',
+    name: 'QuickGraph',
     mixins: [PlayMixin],
     props: {},
     components: { Graph, PlayBtn },
@@ -35,24 +35,25 @@ export default defineComponent({
     watch: {},
     computed: {},
     created: function () {
+        console.log('graph created');
         this.graphs = [
             {
-                graph: new QuickSort(data.random),
+                graph: new QuickSort(data.random()),
                 type: EDataType.RANDOM,
                 sort: ESortType.QUICK,
             },
             {
-                graph: new QuickSort(data.reversed),
+                graph: new QuickSort(data.reversed()),
                 type: EDataType.REVERSED,
                 sort: ESortType.QUICK,
             },
             {
-                graph: new QuickSort(data.few_unique),
+                graph: new QuickSort(data.fewUnique()),
                 type: EDataType.FEW_UNIQUE,
                 sort: ESortType.QUICK,
             },
             {
-                graph: new QuickSort(data.nearly_sorted),
+                graph: new QuickSort(data.nearlySorted()),
                 type: EDataType.NEARLY_SORTED,
                 sort: ESortType.QUICK,
             },

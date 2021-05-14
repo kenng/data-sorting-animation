@@ -288,6 +288,7 @@ export default defineComponent({
 .iw-graph-data {
     padding: 0.5vw;
     max-width: 150px;
+    min-height: 100px;
 }
 
 .iw-line {

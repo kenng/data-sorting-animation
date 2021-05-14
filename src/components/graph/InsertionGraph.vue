@@ -37,22 +37,22 @@ export default defineComponent({
     created: function () {
         this.graphs = [
             {
-                graph: new InsertionSort(data.random),
+                graph: new InsertionSort(data.random()),
                 type: EDataType.RANDOM,
                 sort: ESortType.INSERTION,
             },
             {
-                graph: new InsertionSort(data.reversed),
+                graph: new InsertionSort(data.reversed()),
                 type: EDataType.REVERSED,
                 sort: ESortType.INSERTION,
             },
             {
-                graph: new InsertionSort(data.few_unique),
+                graph: new InsertionSort(data.fewUnique()),
                 type: EDataType.FEW_UNIQUE,
                 sort: ESortType.INSERTION,
             },
             {
-                graph: new InsertionSort(data.nearly_sorted),
+                graph: new InsertionSort(data.nearlySorted()),
                 type: EDataType.NEARLY_SORTED,
                 sort: ESortType.INSERTION,
             },

@@ -25,7 +25,7 @@ import { HeapSort } from 'algorithms/HeapSort';
 import { data, EDataType, ESortType } from 'src/data';
 
 export default defineComponent({
-    name: 'InsertionGraph',
+    name: 'HeapGraph',
     mixins: [PlayMixin],
     props: {},
     components: { Graph, PlayBtn },
@@ -37,22 +37,22 @@ export default defineComponent({
     created: function () {
         this.graphs = [
             {
-                graph: new HeapSort(data.random),
+                graph: new HeapSort(data.random()),
                 type: EDataType.RANDOM,
                 sort: ESortType.HEAP,
             },
             {
-                graph: new HeapSort(data.reversed),
+                graph: new HeapSort(data.reversed()),
                 type: EDataType.REVERSED,
                 sort: ESortType.HEAP,
             },
             {
-                graph: new HeapSort(data.few_unique),
+                graph: new HeapSort(data.fewUnique()),
                 type: EDataType.FEW_UNIQUE,
                 sort: ESortType.HEAP,
             },
             {
-                graph: new HeapSort(data.nearly_sorted),
+                graph: new HeapSort(data.nearlySorted()),
                 type: EDataType.NEARLY_SORTED,
                 sort: ESortType.HEAP,
             },

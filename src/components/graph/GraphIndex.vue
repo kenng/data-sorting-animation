@@ -26,7 +26,7 @@
                 th
                     PlayBtn(
                         :onClickFn='togglePlayFewUnique',
-                        label='Few Uniqued'
+                        label='Few Unique'
                     )
                 th
                     PlayBtn(
@@ -35,12 +35,27 @@
                     )
 
             tbody
-                BubbleGraph
-                SelectionGraph
-                InsertionGraph
-                QuickGraph
-                MergeGraph
-                HeapGraph
+                BubbleGraph(
+                    :key='"bubble" + lastUpdated'
+                )
+                SelectionGraph(
+                    :key='"selection" + lastUpdated'
+                )
+                InsertionGraph(
+                    :key='"insertion" + lastUpdated'
+                )
+                QuickGraph(
+                    :key='"quick" + lastUpdated'
+                )
+                MergeGraph(
+                    :key='"merge" + lastUpdated'
+                )
+                HeapGraph(
+                    :key='"heap" + lastUpdated'
+                )
+
+            tfoot
+                GraphData
 
         GraphOptions.col-1.q-ml-sm.q-mt-lg(
             v-if='$q.screen.gt.xs'
@@ -58,6 +73,7 @@ import QuickGraph from 'components/graph/QuickGraph.vue';
 import MergeGraph from 'components/graph/MergeGraph.vue';
 import HeapGraph from 'components/graph/HeapGraph.vue';
 import GraphOptions from 'src/components/graph/GraphOptions.vue';
+import GraphData from 'src/components/graph/GraphNewData.vue';
 
 export default defineComponent({
     name: 'PageIndex',
@@ -71,10 +87,17 @@ export default defineComponent({
         MergeGraph,
         HeapGraph,
         GraphOptions,
+        GraphData,
+    },
+    computed: {
+        ['$store.state.play.lastUpdatedAt']: function () {
+            this.lastUpdated = this.$store.state.play.lastUpdatedAt;
+        },
     },
     data: function () {
         return {
             graphs: [],
+            lastUpdated: new Date().getTime(),
         };
     },
     created: function () {},

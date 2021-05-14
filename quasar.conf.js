@@ -25,7 +25,7 @@ module.exports = configure(function (ctx) {
         // app boot file (/src/boot)
         // --> boot files are part of "main.js"
         // https://quasar.dev/quasar-cli/boot-files
-        boot: ['composition-api', 'i18n', 'axios'],
+        boot: ['composition-api'],
 
         // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
         css: ['app.css'],
@@ -100,6 +100,10 @@ module.exports = configure(function (ctx) {
             lang: 'en-us', // Quasar language pack
             config: {
                 dark: true,
+                brand: {
+                    primary: '#5810ea',
+                    accent: '#053c3c',
+                },
             },
 
             // Possible values for "importStrategy":
@@ -115,7 +119,7 @@ module.exports = configure(function (ctx) {
             // directives: [],
 
             // Quasar plugins
-            plugins: [],
+            plugins: ['Notify'],
         },
 
         // animations: 'all', // --- includes all animations

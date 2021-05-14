@@ -25,7 +25,7 @@ import { MergeSort } from 'algorithms/MergeSort';
 import { data, EDataType, ESortType } from 'src/data';
 
 export default defineComponent({
-    name: 'InsertionGraph',
+    name: 'MergeGraph',
     mixins: [PlayMixin],
     props: {},
     components: { Graph, PlayBtn },
@@ -37,22 +37,22 @@ export default defineComponent({
     created: function () {
         this.graphs = [
             {
-                graph: new MergeSort(data.random),
+                graph: new MergeSort(data.random()),
                 type: EDataType.RANDOM,
                 sort: ESortType.MERGE,
             },
             {
-                graph: new MergeSort(data.reversed),
+                graph: new MergeSort(data.reversed()),
                 type: EDataType.REVERSED,
                 sort: ESortType.MERGE,
             },
             {
-                graph: new MergeSort(data.few_unique),
+                graph: new MergeSort(data.fewUnique()),
                 type: EDataType.FEW_UNIQUE,
                 sort: ESortType.MERGE,
             },
             {
-                graph: new MergeSort(data.nearly_sorted),
+                graph: new MergeSort(data.nearlySorted()),
                 type: EDataType.NEARLY_SORTED,
                 sort: ESortType.MERGE,
             },

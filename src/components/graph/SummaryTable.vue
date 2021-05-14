@@ -311,6 +311,10 @@ export default defineComponent({
     font-size: 18px;
 }
 
+.iw-com-graph-summary-table .iw-formula td {
+    text-shadow: 1px 1px 1px #402424;
+}
+
 @media screen and (max-width: 599px) {
     .iw-com-graph-summary-table .iw-table-head,
     .iw-com-graph-summary-table .iw-formula {

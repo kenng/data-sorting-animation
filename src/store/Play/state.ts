@@ -1,4 +1,5 @@
 export interface IPlayState {
+    lastUpdatedAt: number;
     isPlayingAll: boolean;
     isPlayingRandom: boolean;
     isPlayingReversed: boolean;
@@ -19,6 +20,7 @@ export interface IPlayState {
 
 function state(): IPlayState {
     return {
+        lastUpdatedAt: new Date().getTime(),
         isPlayingAll: false,
         isPlayingRandom: false,
         isPlayingReversed: false,
@@ -39,6 +41,8 @@ function state(): IPlayState {
 }
 
 export class PlayState {
+    static readonly MUTATAION_LastUpdatedAt = 'iwm_last_updated_at';
+
     static readonly MUTATAION_PlayAll = 'iwm_play_all';
     static readonly MUTATAION_PlayRandom = 'iwm_play_random';
     static readonly MUTATAION_PlayReversed = 'iwm_play_reversed';

@@ -25,7 +25,7 @@ import { SelectionSort } from 'algorithms/SelectionSort';
 import { data, EDataType, ESortType } from 'src/data';
 
 export default defineComponent({
-    name: 'InsertionGraph',
+    name: 'SelectionGraph',
     mixins: [PlayMixin],
     props: {},
     components: { Graph, PlayBtn },
@@ -37,22 +37,22 @@ export default defineComponent({
     created: function () {
         this.graphs = [
             {
-                graph: new SelectionSort(data.random),
+                graph: new SelectionSort(data.random()),
                 type: EDataType.RANDOM,
                 sort: ESortType.SELECTION,
             },
             {
-                graph: new SelectionSort(data.reversed),
+                graph: new SelectionSort(data.reversed()),
                 type: EDataType.REVERSED,
                 sort: ESortType.SELECTION,
             },
             {
-                graph: new SelectionSort(data.few_unique),
+                graph: new SelectionSort(data.fewUnique()),
                 type: EDataType.FEW_UNIQUE,
                 sort: ESortType.SELECTION,
             },
             {
-                graph: new SelectionSort(data.nearly_sorted),
+                graph: new SelectionSort(data.nearlySorted()),
                 type: EDataType.NEARLY_SORTED,
                 sort: ESortType.SELECTION,
             },

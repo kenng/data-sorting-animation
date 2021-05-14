@@ -25,7 +25,7 @@ import { BubbleSort } from 'algorithms/BubbleSort';
 import { data, EDataType, ESortType } from 'src/data';
 
 export default defineComponent({
-    name: 'InsertionGraph',
+    name: 'BubbleGraph',
     mixins: [PlayMixin],
     props: {},
     components: { Graph, PlayBtn },
@@ -37,22 +37,22 @@ export default defineComponent({
     created: function () {
         this.graphs = [
             {
-                graph: new BubbleSort(data.random),
+                graph: new BubbleSort(data.random()),
                 type: EDataType.RANDOM,
                 sort: ESortType.BUBBLE,
             },
             {
-                graph: new BubbleSort(data.reversed),
+                graph: new BubbleSort(data.reversed()),
                 type: EDataType.REVERSED,
                 sort: ESortType.BUBBLE,
             },
             {
-                graph: new BubbleSort(data.few_unique),
+                graph: new BubbleSort(data.fewUnique()),
                 type: EDataType.FEW_UNIQUE,
                 sort: ESortType.BUBBLE,
             },
             {
-                graph: new BubbleSort(data.nearly_sorted),
+                graph: new BubbleSort(data.nearlySorted()),
                 type: EDataType.NEARLY_SORTED,
                 sort: ESortType.BUBBLE,
             },
