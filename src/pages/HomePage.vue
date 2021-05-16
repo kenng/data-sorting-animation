@@ -5,11 +5,6 @@ q-page.iw-page.iw-page-home
 
     GraphIndex
 
-    .q-mt-xs.text-center Graph animation was inspired by&nbsp;
-        a.q-link(
-            href='https://www.toptal.com/developers/sorting-algorithms'
-        ) Toptal
-
     .row.items-center.justify-evenly.q-mt-xl
         SummaryTable
 </template>

@@ -1,79 +1,89 @@
 <template lang="pug">
-.row.items-center.justify-evenly.iw-page-graph-index.q-mt-md
-    .col-md-8.col-xs-12.row
-        GraphOptions.col.q-ml-sm.q-mt-lg(
-            v-if='$q.screen.xs'
-        )
+.iw-page-graph-index
+    .row.items-center.justify-evenly.q-mt-md
+        .col-md-8.col-xs-12.row
+            GraphOptions.col.q-ml-sm.q-mt-lg(
+                v-if='$q.screen.xs'
+            )
 
-    .col-md-8.col-xs-12.row
-        table.col
-            thead
-                th
-                    PlayBtn(
-                        :onClickFn='togglePlayAll',
-                        label='All'
+        .col-md-8.col-xs-12.q-pa-sm
+            GraphLegend
+
+        .col-md-8.col-xs-12.row
+            table.col
+                thead
+                    th
+                        PlayBtn(
+                            :onClickFn='togglePlayAll',
+                            label='All'
+                        )
+                    th
+                        PlayBtn(
+                            :onClickFn='togglePlayRandom',
+                            label='Random'
+                        )
+                    th
+                        PlayBtn(
+                            :onClickFn='togglePlayReversed',
+                            label='Reversed'
+                        )
+                    th
+                        PlayBtn(
+                            :onClickFn='togglePlayFewUnique',
+                            label='Few Unique'
+                        )
+                    th
+                        PlayBtn(
+                            :onClickFn='togglePlayNearlySorted',
+                            label='Nearly Sorted'
+                        )
+
+                tbody
+                    BubbleGraph(
+                        :key='"bubble" + lastUpdated'
                     )
-                th
-                    PlayBtn(
-                        :onClickFn='togglePlayRandom',
-                        label='Random'
+                    SelectionGraph(
+                        :key='"selection" + lastUpdated'
                     )
-                th
-                    PlayBtn(
-                        :onClickFn='togglePlayReversed',
-                        label='Reversed'
+                    InsertionGraph(
+                        :key='"insertion" + lastUpdated'
                     )
-                th
-                    PlayBtn(
-                        :onClickFn='togglePlayFewUnique',
-                        label='Few Unique'
+                    QuickGraph(
+                        :key='"quick" + lastUpdated'
                     )
-                th
-                    PlayBtn(
-                        :onClickFn='togglePlayNearlySorted',
-                        label='Nearly Sorted'
+                    MergeGraph(
+                        :key='"merge" + lastUpdated'
+                    )
+                    HeapGraph(
+                        :key='"heap" + lastUpdated'
                     )
 
-            tbody
-                BubbleGraph(
-                    :key='"bubble" + lastUpdated'
-                )
-                SelectionGraph(
-                    :key='"selection" + lastUpdated'
-                )
-                InsertionGraph(
-                    :key='"insertion" + lastUpdated'
-                )
-                QuickGraph(
-                    :key='"quick" + lastUpdated'
-                )
-                MergeGraph(
-                    :key='"merge" + lastUpdated'
-                )
-                HeapGraph(
-                    :key='"heap" + lastUpdated'
-                )
+                tfoot
+                    GraphData
 
-            tfoot
-                GraphData
+            GraphOptions.col-1.q-ml-sm.q-mt-lg(
+                v-if='$q.screen.gt.xs'
+            )
 
-        GraphOptions.col-1.q-ml-sm.q-mt-lg(
-            v-if='$q.screen.gt.xs'
-        )
+    .q-mt-xs.text-center Graph animation was inspired by&nbsp;
+        a.q-link(
+            href='https://www.toptal.com/developers/sorting-algorithms'
+        ) Toptal
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import PlayMixin from 'src/mixins/play-mixin.vue';
 import PlayBtn from 'components/PlayBtn.vue';
-import InsertionGraph from 'components/graph/InsertionGraph.vue';
-import SelectionGraph from 'components/graph/SelectionGraph.vue';
-import BubbleGraph from 'components/graph/BubbleGraph.vue';
-import QuickGraph from 'components/graph/QuickGraph.vue';
-import MergeGraph from 'components/graph/MergeGraph.vue';
-import HeapGraph from 'components/graph/HeapGraph.vue';
+import InsertionGraph from 'src/components/graph/algorithms/InsertionGraph.vue';
+import SelectionGraph from 'src/components/graph/algorithms/SelectionGraph.vue';
+import BubbleGraph from 'src/components/graph/algorithms/BubbleGraph.vue';
+import QuickGraph from 'src/components/graph/algorithms/QuickGraph.vue';
+import MergeGraph from 'src/components/graph/algorithms/MergeGraph.vue';
+import HeapGraph from 'src/components/graph/algorithms/HeapGraph.vue';
 import GraphOptions from 'src/components/graph/GraphOptions.vue';
 import GraphData from 'src/components/graph/GraphNewData.vue';
+import GraphLegend from 'src/components/graph/GraphLegend.vue';
 
 export default defineComponent({
     name: 'PageIndex',
@@ -88,6 +98,7 @@ export default defineComponent({
         HeapGraph,
         GraphOptions,
         GraphData,
+        GraphLegend,
     },
     watch: {
         ['$store.state.play.lastUpdatedAt']: function () {

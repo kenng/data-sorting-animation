@@ -66,7 +66,7 @@
                 v-for='(item, index) in data',
                 :key='index'
             )
-                .iw-line(
+                .iw-graph-line(
                     :class='getClassName(item, index)',
                     :style='getStyle(item)'
                 )
@@ -89,6 +89,7 @@
 import { defineComponent, PropType } from '@vue/composition-api';
 import { EDataType, IData, ESortType, getlargestValue } from 'src/data';
 import { SortBase } from 'algorithms/SortBase';
+import 'css/graph.css';
 
 export default defineComponent({
     props: {
@@ -291,47 +292,6 @@ export default defineComponent({
     padding: 0.5vw;
     max-width: 150px;
     min-height: 100px;
-}
-
-.iw-line {
-    /* height: 3px; */
-    font-size: 10px;
-    background: #797979;
-    margin: 2px;
-    min-height: 2px;
-}
-
-.iw-line.pointer:before {
-    content: ' ';
-    width: 0px;
-    height: 0px;
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent;
-    border-left: 6px solid blue;
-    position: absolute;
-    left: -6px;
-    margin-top: -5px;
-}
-
-.iw-line.sorted {
-    background: black;
-    background: linear-gradient(to right, #9cecfb, #65c7f7, #0052d4);
-}
-
-.body--dark .iw-line.sorted {
-    background: linear-gradient(to right, #44b5f7, #2b32b2);
-}
-
-.iw-line.active:before {
-    content: ' ';
-    width: 0px;
-    height: 0px;
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent;
-    border-left: 6px solid #f44336;
-    position: absolute;
-    left: -6px;
-    margin-top: -5px;
 }
 
 .iw-total-step {
