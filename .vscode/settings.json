@@ -80,5 +80,6 @@
         "lang-cfml",
         "cfml",
         "HTML (Eex)"
-    ]
+    ],
+    "workbench.startupEditor": "welcomePage"
 }

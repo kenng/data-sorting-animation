@@ -7,7 +7,19 @@ export class HeapSort extends SortBase {
     }
 
     markSorted(currentIndex) {
+        this.currentIndex = currentIndex;
         this.data[currentIndex].sorted = true;
+    }
+
+    setPointer(
+        len: number,
+        parentIndex: number,
+        leftIndex: number,
+        rightIndex: number,
+    ) {
+        this.currentIndex = parentIndex;
+        this.secondMarkerIndex = leftIndex < len ? leftIndex : -1;
+        this.thirdMarkerIndex = rightIndex < len ? rightIndex : -1;
     }
 
     *heapify(len: number, parentIndex: number) {
@@ -16,6 +28,9 @@ export class HeapSort extends SortBase {
         const rightIndex = 2 * parentIndex + 2;
 
         this.totalStep++;
+        // no need to continue if parent is last node in the tree
+        if (leftIndex >= len && rightIndex >= len) return;
+        this.setPointer(len, parentIndex, leftIndex, rightIndex);
 
         if (
             leftIndex < len &&
@@ -32,10 +47,16 @@ export class HeapSort extends SortBase {
         }
 
         if (largest != parentIndex) {
+            // show pointer before swap
+            yield;
             this.swapData(parentIndex, largest);
+            // show the updated data
+            yield;
+            // move to next heapify loop
             yield* this.heapify(len, largest);
+        } else {
+            yield;
         }
-        yield;
     }
 
     *heapSort() {
@@ -51,7 +72,7 @@ export class HeapSort extends SortBase {
 
         // heap sort
         for (let i = len - 1; i >= 0; i--) {
-            // move last element to root
+            // move root element to last, and last element to root
             this.swapData(0, i);
             this.markSorted(i);
 

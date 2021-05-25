@@ -42,6 +42,7 @@ export class BubbleSort extends SortBase {
             }
 
             if (!this.hasSwapped) {
+                // no swapping happened, this means all data has been sorted
                 this.data.map((item) => (item.sorted = true));
                 break;
             } else {
